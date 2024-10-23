@@ -50,6 +50,27 @@ class LivroController extends Controller
     // Retorna a view do formulário de criação de livros
     return view('livros.create');
     }
+    public function destroy($id)
+    {
+        // Encontra o livro pelo ID
+        $livro = Livro::findOrFail($id);
+        
+        // Exclui o livro
+        $livro->delete();
+        
+        // Redireciona de volta à lista de livros com uma mensagem de sucesso
+        return redirect()->route('livros.index')->with('success', 'Livro excluído com sucesso!');
+    }
+    public function edit($id)
+    {
+    // Encontra o livro pelo ID
+    $livro = Livro::findOrFail($id);
+    
+    // Retorna a view de edição com os dados do livro
+    return view('livros.edit', compact('livro'));
+    }
+
+
 
 
 }
