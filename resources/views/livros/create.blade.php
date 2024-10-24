@@ -1,43 +1,38 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 
-@section('content')
-<div class="card">
-    <div class="card-header bg-primary text-white">
-        <h2>Adicionar Novo Livro</h2>
+@section('slot')
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white dark:bg-gray-800">
+                    <h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6">Adicionar Novo Livro</h1>
+
+                    <form action="{{ route('livros.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="titulo" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Título:</label>
+                            <input type="text" name="titulo" id="titulo" class="form-input mt-1 block w-full" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="autor" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Autor:</label>
+                            <input type="text" name="autor" id="autor" class="form-input mt-1 block w-full" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="isbn" class="block text-sm font-medium text-gray-700 dark:text-gray-300">ISBN:</label>
+                            <input type="text" name="isbn" id="isbn" class="form-input mt-1 block w-full" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="editora" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Editora:</label>
+                            <input type="text" name="editora" id="editora" class="form-input mt-1 block w-full" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="ano_publicacao" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Ano de Publicação:</label>
+                            <input type="text" name="ano_publicacao" id="ano_publicacao" class="form-input mt-1 block w-full" required>
+                        </div>
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Salvar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-        <form action="{{ route('livros.store') }}" method="POST">
-            @csrf
-
-            <div class="mb-3">
-                <label for="titulo" class="form-label">Título:</label>
-                <input type="text" name="titulo" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="autor" class="form-label">Autor:</label>
-                <input type="text" name="autor" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="isbn" class="form-label">ISBN:</label>
-                <input type="text" name="isbn" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="editora" class="form-label">Editora:</label>
-                <input type="text" name="editora" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="ano_publicacao" class="form-label">Ano de Publicação:</label>
-                <input type="number" name="ano_publicacao" class="form-control" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Salvar</button>
-        </form>
-
-        <a href="{{ route('livros.index') }}" class="btn btn-secondary mt-3">Voltar</a>
-    </div>
-</div>
 @endsection

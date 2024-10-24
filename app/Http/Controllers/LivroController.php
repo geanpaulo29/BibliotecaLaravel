@@ -1,13 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
+namespace App\Http\Controllers;
+
 use App\Models\Livro;
 use Illuminate\Http\Request;
 
 class LivroController extends Controller
 {
-        public function store(Request $request)
+    public function index()
     {
+        $livros = Livro::paginate(10);
+        return view('livros.index', compact('livros'));
+    }
+
+    public function create()
+    {
+        return view('livros.create');
+    }
+
+    public function store(Request $request)
+    {
+        // Validação e criação do livro
         $request->validate([
             'titulo' => 'required',
             'autor' => 'required',
@@ -17,60 +31,34 @@ class LivroController extends Controller
         ]);
 
         Livro::create($request->all());
-
-        return redirect()->route('livros.index')
-                        ->with('success', 'Livro cadastrado com sucesso!');
+        return redirect()->route('livros.index')->with('success', 'Livro adicionado com sucesso!');
     }
 
-    public function update(Request $request, Livro $livro)
+    public function edit($id)
+    {
+        $livro = Livro::findOrFail($id);
+        return view('livros.edit', compact('livro'));
+    }
+
+    public function update(Request $request, $id)
     {
         $request->validate([
             'titulo' => 'required',
             'autor' => 'required',
-            'isbn' => 'required|unique:livros,isbn,' . $livro->id,
+            'isbn' => 'required|unique:livros,isbn,' . $id,
             'editora' => 'required',
             'ano_publicacao' => 'required|integer',
         ]);
 
+        $livro = Livro::findOrFail($id);
         $livro->update($request->all());
+        return redirect()->route('livros.index')->with('success', 'Livro atualizado com sucesso!');
+    }
 
-        return redirect()->route('livros.index')
-                        ->with('success', 'Livro atualizado com sucesso!');
-    }
-    public function index()
-    {
-        // Buscar todos os livros no banco de dados
-        $livros = Livro::all();
-
-        // Retornar a view 'index' com os livros
-        return view('livros.index', compact('livros'));
-    }
-    public function create()
-    {
-    // Retorna a view do formulário de criação de livros
-    return view('livros.create');
-    }
     public function destroy($id)
     {
-        // Encontra o livro pelo ID
         $livro = Livro::findOrFail($id);
-        
-        // Exclui o livro
         $livro->delete();
-        
-        // Redireciona de volta à lista de livros com uma mensagem de sucesso
         return redirect()->route('livros.index')->with('success', 'Livro excluído com sucesso!');
     }
-    public function edit($id)
-    {
-    // Encontra o livro pelo ID
-    $livro = Livro::findOrFail($id);
-    
-    // Retorna a view de edição com os dados do livro
-    return view('livros.edit', compact('livro'));
-    }
-
-
-
-
 }
