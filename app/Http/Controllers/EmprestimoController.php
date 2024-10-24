@@ -37,4 +37,10 @@ class EmprestimoController extends Controller
 
     return redirect()->route('emprestimos.index')->with('success', 'Livro emprestado com sucesso');
     }
+
+    public function devolver(Emprestimo $emprestimo){
+        $emprestimo->update(['data_devolucao' => now()]);
+
+        return redirect()->route('emprestimos.index')->with('success','Livro devolvido com sucesso');
+    }
 }
