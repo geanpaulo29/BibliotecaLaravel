@@ -29,7 +29,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $emprestimo->data_devolucao ? date('d/m/Y', strtotime($emprestimo->data_devolucao)) : 'Ainda não devolvido' }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             @if (!$emprestimo->data_devolucao)
-                                                <form action="{{ route('emprestimo.devolver', $emprestimo->id) }}" method="POST" class="inline-block">
+                                                <form action="{{ route('emprestimos.devolver', $emprestimo->id) }}" method="POST" class="inline-block">
                                                     @csrf
                                                     <button type="submit" class="text-red-600 hover:text-red-900">Devolver</button>
                                                 </form>

@@ -26,10 +26,10 @@
                                 @endforeach
                         </div>
                         <div class="mb-4">
-                            <label for="matricula" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Matrícula:</label>
-                            <input type="text" name="matricula" id="matricula" class="form-input mt-1 block w-full" required>
+                            <label for="data_emprestimo" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Data de empréstimo:</label>
+                            <input type="text" name="data_emprestimo" id="data_emprestimo" class="form-input mt-1 block w-full" required>
                         </div>
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Salvar</button>
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Registrar Empréstimo</button>
                     </form>
                 </div>
             </div>
